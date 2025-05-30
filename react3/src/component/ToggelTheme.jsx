@@ -7,7 +7,9 @@ export default function ToggleTheme(){
           }
     return(
         <div>
-
+<body className={isDarkTheme ? 'dark-theme' : 'light-theme'}>
+    
+</body>
 <button onClick={toggleTheme}><p className={isDarkTheme ? 'dark-theme' : 'light-theme'}>{isDarkTheme ? 'isdark' : 'islight'}</p></button>
 
         </div>
