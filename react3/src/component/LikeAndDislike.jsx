@@ -2,16 +2,35 @@ import { useState } from "react";
 
 export default function LikeAndDislike(){
     const [like,setlike]=useState(0)
+    const [state,setstate]=useState(null)
+
+    const likeColor = state === 'like' ? 'green' : 'black';
+    const dislikeColor = state === 'dislike' ? 'red' : 'black';
+
     function handleLike() {
-       setlike(like+1) 
+        if (state === 'like') {
+            setlike(like - 1);
+            setstate(null);
+          } else {
+            setlike(state === 'dislike' ? like + 1 : like + 1);
+            setstate('like');
+          }
+       
     }
     function handleDislike() {
-       setlike(like-1) 
+        if (state === 'dislike') {
+            setlike(like + 1);
+            setstate(null);
+          } else {
+            setlike(state === 'like' ? Math.max(0, like - 1) : Math.max(0, like - 1));
+            setstate('dislike')
+          }
+
     }
     return(
         <div>
             <p>{like}</p>
-            <button onClick={handleLike} style={{background:"green"}}>like
+            <button onClick={handleLike} style={{ color:likeColor}} >like
             <svg
   xmlns="http://www.w3.org/2000/svg"
   width="40"
@@ -24,7 +43,7 @@ export default function LikeAndDislike(){
             </svg>
             </button>
 
-            <button onClick={handleDislike} style={{background:"red"}}>dislike
+            <button onClick={handleDislike} style={{color:dislikeColor}}>dislike
             <svg
             xmlns="http://www.w3.org/2000/svg"
              width="40"
